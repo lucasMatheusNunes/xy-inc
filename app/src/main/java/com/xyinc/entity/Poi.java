@@ -1,8 +1,10 @@
 package com.xyinc.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
 
@@ -12,6 +14,8 @@ public class Poi {
     @Id
     @GeneratedValue
     private long id;
+    @Column(nullable = false, length = 60)
+    @NotEmpty(message = "Name is required")
     private String name;
     //@Min(value = 0, message = "Coordinate X must be a positive number")
     private int coordinateX;
