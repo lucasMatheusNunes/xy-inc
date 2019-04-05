@@ -10,6 +10,6 @@ public class IndexController {
 
     @RequestMapping(method= RequestMethod.GET, path = "/")
     public String index() {
-        return "index";
+        return "XY-Inc";
     }
 }

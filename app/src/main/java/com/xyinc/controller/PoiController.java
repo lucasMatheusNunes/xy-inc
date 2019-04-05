@@ -1,7 +1,7 @@
 package com.xyinc.controller;
 
 import com.xyinc.entity.Poi;
-import com.xyinc.exception.CustomException;
+import com.xyinc.exception.AlreadyRegisteredException;
 import com.xyinc.service.PoiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +26,12 @@ public class PoiController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Poi> save(@Valid @RequestBody Poi poi) throws CustomException {
+    public ResponseEntity<Poi> save(@Valid @RequestBody Poi poi) throws AlreadyRegisteredException {
         return ok(service.save(poi));
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/next")
-    public ResponseEntity<List<Poi>> findNext(@RequestParam("x") int x, @RequestParam("y") int y, @RequestParam("d") int d){
+    @RequestMapping(method = RequestMethod.GET, path = "/next/{x}/{y}/{d}")
+    public ResponseEntity<List<Poi>> findNext(@PathVariable("x") int x, @PathVariable("y") int y, @PathVariable("d") int d){
         return ok(service.findNext(x, y, d));
     }
 

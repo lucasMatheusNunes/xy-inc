@@ -1,7 +1,8 @@
 package com.xyinc.service;
 
 import com.xyinc.entity.Poi;
-import com.xyinc.exception.CustomException;
+import com.xyinc.exception.AlreadyRegisteredException;
+import com.xyinc.exception.InvalidFieldException;
 import com.xyinc.repository.PoiRepository;
 import com.xyinc.repository.implementation.PoiImplementation;
 import com.xyinc.to.PoiNextTO;
@@ -25,12 +26,12 @@ public class PoiService {
         return repository.findAll();
     }
 
-    public Poi save(@Valid Poi poi) throws CustomException {
+    public Poi save(@Valid Poi poi) throws AlreadyRegisteredException{
         if(poi.getCoordinateX() < 0 || poi.getCoordinateY() < 0){
-            throw new CustomException("Coordinate X and Coordinate Y should be a positive number");
+            throw new InvalidFieldException("Coordinate X and Coordinate Y should be a positive number");
         }
         if(repository.findFirstByCoordinateXAndCoordinateY(poi.getCoordinateX(), poi.getCoordinateY()) != null ){
-            throw new CustomException("Already a Point of Interest with the same coordinates.");
+            throw new AlreadyRegisteredException("Already a Point of Interest with the same coordinates.");
         }
         return repository.save(poi);
     }

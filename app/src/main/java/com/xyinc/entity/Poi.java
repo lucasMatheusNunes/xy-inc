@@ -17,9 +17,7 @@ public class Poi {
     @Column(nullable = false, length = 60)
     @NotEmpty(message = "Name is required")
     private String name;
-    //@Min(value = 0, message = "Coordinate X must be a positive number")
     private int coordinateX;
-    //@Min(value = 0, message = "Coordinate Y must be a positive number")
     private int coordinateY;
 
     public  Poi(){
